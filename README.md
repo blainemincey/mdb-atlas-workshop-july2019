@@ -79,7 +79,7 @@ see that it is storing an address and embedding yet another object for its geolo
 Working with data in this way, it is much easier than having to flatten out multiple
 tables from a relational/tabular model into a single object.
 
-### Lab 3 - Analyze the Schema
+#### Lab 3 - Analyze the Schema
 Analyze the schema???  Wait, I thought that MongoDB was a NoSQL database and was considered
 to be schema-less?  While that is technically true, no dataset would be of any use
 without the notion or concept of a schema.  Although MongoDB does not enforce a schema,
@@ -98,13 +98,13 @@ to the image below:
 
 ![](img/compassmap.jpg)  
 
-### Lab 4 - Query Data with MongoDB Compass (CRUD Operations)
+#### Lab 4 - Query Data with MongoDB Compass (CRUD Operations)
 Simply copy the code block for each section below and paste within the filter
 dialog in MongoDB Compass as indicated below:
 
 ![](img/compass-filterblock.jpg)  
 
-#### Find Operations  
+##### Find Operations  
 
 * Simple filter (specific name in sample_mflix.comments collection)
 ```
@@ -126,7 +126,27 @@ dialog in MongoDB Compass as indicated below:
 {languages : {$in : ["Arabic", "Welsh"]}}
 ```
 
-#### Update, Delete, Clone Operations
+* Only movies in Arabic
+```
+{languages : ["Arabic"] }
+``` 
+
+* Movies in BOTH Arabic and Spanish
+```
+{languages : { $all : ["Arabic", "Spanish"]}}
+```
+
+* Movies with IMDB Rating > 8.0 and PG Rating
+```
+{"imdb.rating": {$gt : 8.0 }, rated : "PG"}
+```
+
+* Movies with Title starting with "Dr. Strangelove"
+```
+{ title : /^Dr. Strangelove/ }
+```
+
+##### Update, Delete, Clone Operations
 Find a document in any collection and choose to update a field or fields.  In fact,
 you can select to add a field that does not exist.  Next, clone a document.  Then,
 delete the cloned document.  MongoDB Compass provides all the CRUD controls you
@@ -134,7 +154,7 @@ will need.  Below is a sample image displaying where this capability is:
 
 ![](img/copyclonedelete.jpg)
 
-### Lab 5 - Create indexes to improve efficiency of queries
+#### Lab 5 - Create indexes to improve efficiency of queries - Part 1
 Indexes support the efficient execution of queries in MongoDB.  Without indexes,
 MongoDB must perform a *collection scan*, i.e., scan every document in a collection
 to select those documents that match the query statement.  If an appropriate
@@ -174,7 +194,70 @@ filter performed an index scan.  Your results should look similar to below:
 
 ![](img/createindex2.jpg)  
 
-    
+#### Indexes - Part 2
+Now, try the following query:
+```
+{released : {$gte : ISODate('2010-01-01')}, rated : 'R'}
+```
+**Be sure to sort this query with the following:**
+```
+{"imdb.rating" : 1 }
+```
+
+After executing the query, try to run an *Explain Plan* on it.  It should look
+like the following:
+
+![](img/indexpart2.jpg)  
+
+Any ideas or suggestions on a possible index?  Based on our query, the first
+thought may be to create an ascending index on released, rated, and imdb.rating.
+You can try this in fact and see the results.  It should resemble this below:
+
+![](img/index2part1.jpg)  
+
+However, the general rule of thumb is to remember: Equality, Sort, and Range. Consider
+that we are matching exactly on rated.  Then, we sort on the imdb.rating.  Finally,
+our range is the released date.  Delete the previously created index.  Let's try this now by creating an ascending index
+in the order of rated, imdb.rating, and the released fields.  It should look like below:
+
+![](img/newidx.jpg)  
+
+Go back to the *Explain Plan* tab and let's see the new results:
+
+![](img/mynewidxresult.jpg)  
+
+This is a great rule of thumb:  Equality, Sort, Range!
+
+#### Lab 6 - Aggregation Framework
+
+
+### MongoDB Stitch Labs
+#### Lab 1 - Create a MongoDB Stitch Application
+
+#### Lab 2 - Create a REST API (i.e. microservices)
+##### GET Method
+##### POST Method
+
+#### Lab 3 - Create a Stitch Trigger
+
+#### Lab 4 - Query Anywhere with Stitch (Static HTML)
+
+#### Lab 5 - MongoDB Static Hosting
+
+### MongoDB Charts
+#### Lab 1 - Create a MongoDB Chart
+
+#### Lab 2 - Embedding MongoDB Charts
+
+### Controlling Access to Data using Rules with MongoDB Stitch
+https://github.com/blainemincey/stitch-rules-mdbw2019
+
+
+### Code Samples
+#### Python
+#### Node.js
+#### C#
+
 
 
 
