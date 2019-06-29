@@ -229,7 +229,81 @@ Go back to the *Explain Plan* tab and let's see the new results:
 This is a great rule of thumb:  Equality, Sort, Range!
 
 #### Lab 6 - Aggregation Framework
+MongoDB's [aggregation framework](https://docs.mongodb.com/manual/core/aggregation-pipeline/) is modeled
+on the concept of data processing pipelines.  Documents enter a multi-state pipeline
+that transforms the documents into an aggregated result.  The most basic pipeline stages
+provide filters that operate like queries and document transformations that modify the
+form of the output document.  Other pipeline operations provide tools for grouping and
+sorting documents by specific field or fields as well as tools for aggregating the 
+contents of arrays, including arrays of documents. In addition, pipeline stages can 
+use operators for tasks such as calculating the average or concatenating a string.  The
+pipeline provides efficient data aggregation using native operations within MongoDB, 
+and is the preferred method for data aggregation in MongoDB.
 
+For our next exercise, we will use the aggregation pipeline builder in MongoDB Compass to
+create our aggregation pipelines.
+
+Let's say we have been tasked with determining the most popular genres that have been produced
+in the USA, Germany, and France since 2000.  Click on the *Aggregations* tab and select
+*New Pipeline* dialog.  It should look like this below:
+
+![](img/newaggregation.jpg)  
+
+First, our aggregation will need to filter for movies with a country of *only*
+the USA, France, or Germany and have been produced since the year 2000.  
+This will be done with a "$match" operation.
+
+In the first stage of the pipeline builder, select *$match* from the dropdown and
+paste the following:
+
+```
+{
+  countries : ["USA", "Germany", "France"],
+  year : {$gt : 2000 }
+}
+```
+
+You will notice that a preview of sample documents is on the right-hand side
+of the builder.  Now, we want to *unwind* the genres array as we want to count
+the most popular arrays.  The next stage will be an unwind operation on genres. Paste
+this in the next stage:
+```
+{
+    path: "$genres"
+}
+```
+
+Now, we will want to group by the genres and count them.  This is done with the
+$group operator and the $sum operator.  Copy/Paste the snippet below into the next
+stage:
+```
+{
+  _id: "$genres",
+  genre: {
+    $sum: 1
+  }
+}
+```
+
+Next, we want to sort the result in *descending* fashion so the most popular
+genre is the first element of our result.  Can you figure out how to do that?
+
+Your final pipeline will be the following:
+
+```
+[
+    {
+        $match: {
+            countries : ["USA", "Germany", "France"],
+            year : {$gt : 2000 } }}, 
+        { $unwind: { path: "$genres" }}, 
+        { $group: { _id: "$genres",
+                   genre: { $sum: 1 } }}, 
+        { $sort: { "genre": -1 }
+    }
+]
+```
+You can choose to save this pipeline if you would like to open it later.
 
 ### MongoDB Stitch Labs
 #### Lab 1 - Create a MongoDB Stitch Application
