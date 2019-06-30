@@ -46,7 +46,7 @@ a REST API.  For these examples you can use [curl](https://curl.haxx.se/download
 [Postman](https://www.getpostman.com/).
 
 ---
-###Outline of Workshop:
+### Outline of Workshop:
 1. Practical Exercises with MongoDB Compass
     * Basic Find Queries
     * Evaluate query performance and indexes
