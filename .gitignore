@@ -88,5 +88,8 @@ yarn-error.log*
 .idea
 /.idea
 
-# Do not like to commit package-lock.json
+# Node files
+node_modules/
+src/node/node_modules/*
 package-lock.json
+src/node/package-lock.json

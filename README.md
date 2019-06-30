@@ -348,6 +348,13 @@ you have created in the prior lab for microservices.
 For the complete set of steps, please reference the Github repository
 for [Stitch Rules and Stitch Query Anywhere](https://github.com/blainemincey/stitch-rules-mdbw2019).
 
+#### Lab 3 - Stitch Hosting
+Stitch Hosting allows you to host, manage, and serve your application’s static media 
+and document files. You can use Hosting to store individual pieces of content 
+or to upload and serve your entire client application.
+
+Follow the MongoDB Stitch documentation for [Hosting](https://docs.mongodb.com/stitch/hosting/).
+
 ---
 ### MongoDB Charts
 MongoDB Charts is the best way to create visualizations of MongoDB data. 
@@ -466,8 +473,21 @@ possible with MongoDB Charts.  Follow the guide to [Embed Charts in Your Web App
 
 ---
 ### Code Samples
+MongoDB provides a very rich set of APIs for a variety of programming languages.  This includes
+everything from C to Go to Java, etc.  The complete list of MongoDB Drivers is available
+on the [MongoDB Drivers and ODM](https://docs.mongodb.com/ecosystem/drivers/) page.
+
+A few examples are provided within this repository to assist you in getting a jump start
+on developing with MongoDB Atlas.  There is an example for Python, Node.js, and C#.
+
+In fact, feel free to use some of the earlier queries we used in the MongoDB Compass
+labs earlier.  MongoDB Compass provides the capability to export queries in a variety
+of languages so you can easily copy/paste into your source code.
+
 #### Python
+
 #### Node.js
+
 #### C#
 
 
