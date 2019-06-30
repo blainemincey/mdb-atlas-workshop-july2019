@@ -7,6 +7,7 @@ The data that will be utilized in this workshop
 will be one of the sample data sets that can be loaded into MongoDB Atlas via the
 click of a button.
 
+---
 ## Introduction to MongoDB and MongoDB Atlas
 ### Hands-on Workshop
 #### Overview
@@ -44,6 +45,30 @@ exercises will be utilizing a microservices style architecture by making calls v
 a REST API.  For these examples you can use [curl](https://curl.haxx.se/download.html) or
 [Postman](https://www.getpostman.com/).
 
+---
+###Outline of Workshop:
+1. Practical Exercises with MongoDB Compass
+    * Basic Find Queries
+    * Evaluate query performance and indexes
+    * Aggregation Framework
+    
+2. Part 1 - MongoDB Stitch (Microservices)
+    * GET/POST operations via webhooks
+    * Triggers
+    
+3. Part 2 - MongoDB Stitch (Control Data Access via Rules)
+    * MongoDB Rules
+    * Query Anywhere
+    * Stitch Hosting
+    
+4. MongoDB Charts
+    * General Charts Demonstration
+    
+5. Code Samples
+    * Variety of code examples in Python, Node.js, and C#
+    
+   
+---
 ### MongoDB Compass Lab
 #### Lab 1 - Connect to your cluster in MongoDB Atlas
 If you have completed the steps above, we can now copy the connection string and
@@ -305,28 +330,32 @@ Your final pipeline will be the following:
 ```
 You can choose to save this pipeline if you would like to open it later.
 
+---
 ### MongoDB Stitch Labs
-#### Lab 1 - Create a MongoDB Stitch Application
+#### Lab 1 - Microservices with MongoDB Stitch
+For the next series of exercises, continue to use the same cluster you
+have just created.  You will be creating your first Stitch Application that
+will be using the same database and collection for the previous labs.
 
-#### Lab 2 - Create a REST API (i.e. microservices)
-##### GET Method
-##### POST Method
+For the complete set of steps, please reference the Github repository
+for [Stitch Microservices](https://github.com/blainemincey/stitch-microservices-mdbw2019). 
 
-#### Lab 3 - Create a Stitch Trigger
+#### Lab 2 - Controlling Access to Data using Rules with MongoDB Stitch
+For the next series of exercises, continue to use the same cluster you
+have just created.  You will be "adding on" to the Stitch Application that
+you have created in the prior lab for microservices.
 
-#### Lab 4 - Query Anywhere with Stitch (Static HTML)
+For the complete set of steps, please reference the Github repository
+for [Stitch Rules and Stitch Query Anywhere](https://github.com/blainemincey/stitch-rules-mdbw2019).
 
-#### Lab 5 - MongoDB Static Hosting
-
+---
 ### MongoDB Charts
 #### Lab 1 - Create a MongoDB Chart
 
 #### Lab 2 - Embedding MongoDB Charts
 
-### Controlling Access to Data using Rules with MongoDB Stitch
-https://github.com/blainemincey/stitch-rules-mdbw2019
 
-
+---
 ### Code Samples
 #### Python
 #### Node.js
