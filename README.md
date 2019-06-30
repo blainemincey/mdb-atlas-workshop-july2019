@@ -485,11 +485,13 @@ labs earlier.  MongoDB Compass provides the capability to export queries in a va
 of languages so you can easily copy/paste into your source code.
 
 #### Python
+[Python3 Sample](https://github.com/blainemincey/mdb-atlas-workshop-july2019/blob/master/src/python/my_python_app.py)
 
 #### Node.js
+[Node.js Sample](https://github.com/blainemincey/mdb-atlas-workshop-july2019/blob/master/src/node/myNodeApp.js)
 
 #### C#
-
+[C# Sample](https://github.com/blainemincey/mdb-atlas-workshop-july2019/blob/master/src/csharp/MyMongoDBApp/Program.cs)
 
 
 

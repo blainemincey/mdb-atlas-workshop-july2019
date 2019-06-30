@@ -95,5 +95,5 @@ package-lock.json
 src/node/package-lock.json
 
 # Dot Net stuff
-src/csharp/bin/
-src/csharp/obj/
+src/csharp/bin*
+src/csharp/obj*
