@@ -47,7 +47,7 @@ a REST API.  For these examples you can use [curl](https://curl.haxx.se/download
 
 ---
 ### Outline of Workshop:
-1. Practical Exercises with MongoDB Compass
+1. MongoDB Compass
     * Basic Find Queries
     * Evaluate query performance and indexes
     * Aggregation Framework
@@ -350,10 +350,119 @@ for [Stitch Rules and Stitch Query Anywhere](https://github.com/blainemincey/sti
 
 ---
 ### MongoDB Charts
+MongoDB Charts is the best way to create visualizations of MongoDB data. 
+Connect to any MongoDB instance as a data source, create charts and graphs, 
+embed them into your applications or build live dashboards for sharing 
+and collaboration.
+
+This lab follows a subset of the steps that are provided in the MongoDB Documentation for the
+MongoDB Charts Tutorial for [Visualizing Movie Details](https://docs.mongodb.com/charts/master/tutorial/movie-details/movie-details-tutorial-overview/).
+
 #### Lab 1 - Create a MongoDB Chart
+You will first need to launch MongoDB Charts for the left navigation pane in MongoDB
+Atlas as indicated below:
 
-#### Lab 2 - Embedding MongoDB Charts
+![](img/charts1.jpg)  
 
+Once the UI loads for Charts, you will then need to click the Data Sources Tab:
+
+![](img/charts2.jpg)  
+
+In the Data Sources View, you will then add a New Data Source as below:
+
+![](img/charts4.jpg)  
+
+After you click *Connect*, it may take about a minute before it actually connects.
+
+After connecting, you will then select the *sample_mflix* database that we have 
+been using and we will also select each collection in the database.
+
+![](img/charts5.jpg)  
+
+Now, click the *Set Permissions* button.  Leave all of the default selections and click
+the *Publish Data Source* button.  You should have successfully established the data
+source in charts.  Now, we will create a *New Dashboard*.
+
+Click the *Dashboards* tab which should be indicated similar to the image below:
+
+![](img/charts6.jpg)  
+
+Click the *New Dashboard* button and add a Title and a Description to your dashboard.
+It should look similar to that below:
+
+![](img/charts7.jpg)  
+
+Now, we will create our first chart.  Click the *Add Chart* button.
+Next, we will need to select the *sample_mflix.movies* data.  Next, select
+the Chart Type as Column.  Select the panel labeled Stacked below the Chart Type
+menu.  It should look like the image below:
+
+![](img/charts8.jpg)  
+
+* Drag the directors field from the Fields section of the Chart Builder view to 
+the X Axis encoding channel.
+
+* In the directors Array Reductions dropdown, select Unwind Array.
+
+* In the Fields section click the awards field to expand the awards object and 
+view its properties.  
+
+* Drag the awards.wins field to the Y Axis encoding channel. 
+The Y Axis encoding channel determines which field to use for the chart’s aggregation.
+
+* Leave the Aggregate dropdown menu for the Y Axis encoding channel on its default value of sum. 
+This value directs the aggregation operation to return the total number of award wins for each director.
+
+* Limit the *directors* array should be limited to 10.
+
+* Group the awards by *genre*.  For Array Reduction on the Series encoding channel,
+select *unwind array*.
+
+* Title the chart: Directors with Most Awards, Split by Genre
+
+Prior to saving and closing the chart, it should look like that below:
+
+![](img/charts9.jpg)  
+
+#### Lab 2 - Scatter Chart
+add a chart to your dashboard showing the TomatoMeter rating and MPAA rating of 
+movies with the most award nominations. A scatter chart is a good choice for 
+visualizing how data points cluster together around certain values and 
+allows the representation of several different data dimensions.
+
+In the upper-right of the Charts UI, select *Add Chart*.  For the Data Source
+we will once again use sample_mflix.movies.  Select the Chart Type as Grid and
+select the Scatter panel below the dropdown menu.  Your screen should look like
+that below:
+
+![](img/charts10.jpg)  
+
+* In the Fields section, click the tomatoes field to expand the tomatoes object 
+and view its properties.
+
+* Click the tomatoes.critic field to also expand that object.
+
+* Drag the tomatoes.critic.rating field to the X Axis encoding channel.
+
+* In the Fields section click the awards field to expand the awards object and 
+view its properties.
+
+* Drag the awards.nominations field to the Y Axis encoding channel.
+
+* Add a query filter for only movies with at least 30 award nominations and 
+marginal MPAA Ratings.  In the Filters box, add the following query and apply:
+```
+{"awards.nominations": {$gte: 30}, rated: {$in: ["G", "PG", "PG-13", "R"]}}
+```
+* Drag the rated field to the Color encoding channel.
+
+Your chart prior to saving, should look like that below:
+
+![](img/charts11.jpg)  
+
+#### Lab 3 - Embedding MongoDB Charts
+If you would like to embed your chart within in existing webpage, that is also
+possible with MongoDB Charts.  Follow the guide to [Embed Charts in Your Web Application](https://docs.mongodb.com/charts/master/embedding-charts/).
 
 ---
 ### Code Samples
